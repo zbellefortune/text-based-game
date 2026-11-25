@@ -53,10 +53,13 @@ def move(gameData):
                 return
         print("Invalid choice")
         time.sleep(1)
-
-move(gameData)
 def checkInv(gameData):
-    ...
+    print("--Inventory--")
+    x = 0
+    for item in gameData["PlayerState"]["inventory"]:
+        x += 1
+        print(f"{x}. {item}")
+
 def searchRoom(gameData):
     ...
 def save(gameData):
