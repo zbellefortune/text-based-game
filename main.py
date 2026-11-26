@@ -61,7 +61,18 @@ def checkInv(gameData):
         print(f"{x}. {item}")
 
 def searchRoom(gameData):
-    ...
+    currentroom = gameData["PlayerState"]["curRoom"]
+    item = gameData["rooms"][currentroom]["item"]
+    if item == None:
+        print("There is nothing here")
+        time.sleep(1)
+        return
+    gameData["PlayerState"]["inventory"].append(item)
+    gameData["rooms"][currentroom]["item"] = None
+    print(f"You have found a {item}")
+    time.sleep(1)
+
+
 def save(gameData):
     ...
 def load(gameData):
@@ -69,20 +80,26 @@ def load(gameData):
 
 def main(gameData): # main code will run here
     setupGame(gameData)
-    choice = int(menu())
+    while True:
 
-    if choice == 1:
-        move()
-    elif choice == 2:
-        checkInv()
-    elif choice == 3:
-        searchRoom()
-    elif choice == 4:
-        # save or load
-        ...
-    elif choice == 5:
-        # exit 
-        ...
-    else:
-        raise ValueError("somethings wrong")
-menu()
+        choice = int(menu())
+
+        if choice == 1:
+            move(gameData)
+        elif choice == 2:
+            checkInv(gameData)
+        elif choice == 3:
+            searchRoom(gameData)
+        elif choice == 4:
+            # save or load
+            ...
+        elif choice == 5:
+            # exit 
+            ...
+        else:
+            raise ValueError("somethings wrong")
+main(gameData)
+
+
+#notes
+    #make inventory give a description of what each item does
